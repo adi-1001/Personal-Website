@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Developer portfolio for Aditya Anshu">
+  <title>Aditya / Software Developer</title>
+
+  <!-- Tailwind CSS CDN & Custom Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#090b0c',      /* Main Background */
+            paper: '#e9e8e3',    /* Main Text */
+            muted: '#8e928e',    /* Secondary Text */
+            line: '#242827',     /* Borders */
+            lime: '#c8f56a',     /* Accent Color */
+            rust: '#ed795f'
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #090b0c; color: #e9e8e3; }
+    ::selection { background: #c8f56a; color: #090b0c; }
+    
+    /* Hollow outline text style used in the hero heading */
+    .outline-text { 
+      -webkit-text-stroke: 1px rgba(233,232,227,.56); 
+      color: transparent; 
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Main Container -->
+  <div class="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
+    <!-- Content sections will go here -->
+  </div>
+
+</body>
+</html>
