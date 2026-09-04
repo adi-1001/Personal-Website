@@ -1,0 +1,1 @@
+Hi, I’m Aditya—a student and product-minded software developer who loves building digital tools from the ground up. I care deeply about quiet craft, robust architecture, and refining every detail to create seamless software that feels natural and reliable.
