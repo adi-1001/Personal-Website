@@ -1,0 +1,196 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #090b0c;
+  color: #e9e8e3;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #c8f56a;
+  color: #090b0c;
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: #c8f56a;
+  box-shadow: 0 0 10px rgba(200, 245, 106, 0.8), 0 0 20px rgba(200, 245, 106, 0.4);
+  z-index: 10000;
+  pointer-events: none;
+  transition: width 0.1s ease-out;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+header.scrolled {
+  background-color: rgba(9, 11, 12, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: rgba(200, 245, 106, 0.2);
+}
+
+.outline-text {
+  -webkit-text-stroke: 1px rgba(233, 232, 227, 0.5);
+  color: transparent;
+  transition: -webkit-text-stroke-color 0.3s ease;
+}
+
+.outline-text:hover {
+  -webkit-text-stroke-color: #c8f56a;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #c8f56a;
+  box-shadow: 0 0 12px #c8f56a;
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 18px #c8f56a;
+  }
+}
+
+@media (pointer: fine) {
+  html, body, a, button, input, textarea, label, [role="button"] {
+    cursor: none !important;
+  }
+
+  #cursor-dot,
+  #cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    opacity: 0;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) translate(var(--cursor-x, -100px), var(--cursor-y, -100px));
+    transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease,
+                background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #c8f56a;
+    box-shadow: 0 0 8px #c8f56a, 0 0 16px rgba(200, 245, 106, 0.8);
+  }
+
+  #cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(200, 245, 106, 0.5);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 0 12px rgba(200, 245, 106, 0.2);
+  }
+
+  #cursor-dot.is-visible,
+  #cursor-ring.is-visible {
+    opacity: 1;
+  }
+
+  #cursor-dot.is-hovering {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 12px #ffffff, 0 0 24px #c8f56a;
+  }
+
+  #cursor-ring.is-hovering {
+    width: 50px;
+    height: 50px;
+    border-color: #c8f56a;
+    background-color: rgba(200, 245, 106, 0.08);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 0 24px rgba(200, 245, 106, 0.35);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(4px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+.interactive-card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.interactive-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(200, 245, 106, 0.07),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.interactive-card:hover::before {
+  opacity: 1;
+}
+
+.interactive-card:hover {
+  border-color: rgba(200, 245, 106, 0.4);
+}
+
+.form-feedback {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease;
+}
+
+.form-feedback.show {
+  opacity: 1;
+  max-height: 120px;
+  margin-top: 1rem;
+}

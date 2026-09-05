@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Developer portfolio for Aditya Anshu">
-  <title>Aditya / Software Developer</title>
+  <meta name="description" content="Portfolio of Aditya Anshu - Student &amp; Software Developer">
+  <meta name="theme-color" content="#090b0c">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Aditya Anshu — Student &amp; Software Developer</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -12,11 +14,11 @@
       theme: {
         extend: {
           colors: {
-            ink: '#090b0c',      
-            paper: '#e9e8e3',    
-            muted: '#8e928e',    
-            line: '#242827',     
-            lime: '#c8f56a',     
+            ink: '#090b0c',
+            paper: '#e9e8e3',
+            muted: '#8e928e',
+            line: '#242827',
+            lime: '#c8f56a',
             rust: '#ed795f'
           },
           fontFamily: {
@@ -30,211 +32,118 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    html { scroll-behavior: smooth; }
-    body { background: #090b0c; color: #e9e8e3; }
-    ::selection { background: #c8f56a; color: #090b0c; }
-    
-    
-    .outline-text { 
-      -webkit-text-stroke: 1px rgba(233,232,227,.56); 
-      color: transparent; 
-    }
-
-    .eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-right: 10px;
-      border-radius: 50%;
-      background: #c8f56a;
-      box-shadow: 0 0 14px #c8f56a;
-    }
-
-      
-       
-    html, body, a, button, input, textarea, [role="button"] {
-      cursor: none !important;
-    }
-
-    
-    #cursor-dot,
-    #cursor-ring {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 50%;
-      opacity: 0;
-      transform-origin: center center;
-      transform: translate(-50%, -50%) translate(var(--cursor-x, -100px), var(--cursor-y, -100px));
-      transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    
-    #cursor-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #c8f56a;
-      box-shadow: 0 0 8px #c8f56a, 0 0 16px rgba(200, 245, 106, 0.8);
-    }
-
-    
-    #cursor-ring {
-      width: 32px;
-      height: 32px;
-      border: 1px solid rgba(200, 245, 106, 0.5);
-      backdrop-filter: blur(2px);
-      box-shadow: 0 0 12px rgba(200, 245, 106, 0.2);
-    }
-
-    
-    #cursor-dot.is-visible,
-    #cursor-ring.is-visible {
-      opacity: 1;
-    }
-
-    
-    #cursor-dot.is-hovering {
-      width: 10px;
-      height: 10px;
-      background-color: #ffffff;
-      box-shadow: 0 0 12px #ffffff, 0 0 24px #c8f56a;
-    }
-
-    #cursor-ring.is-hovering {
-      width: 52px;
-      height: 52px;
-      border-color: #c8f56a;
-      background-color: rgba(200, 245, 106, 0.1);
-      backdrop-filter: blur(1px);
-      -webkit-backdrop-filter: blur(4px);
-      box-shadow: 0 0 25px rgba(200, 245, 106, 0.4);
-    }
-    
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="font-sans antialiased">
+  <div id="scroll-progress" aria-hidden="true"></div>
   <canvas id="particle-canvas" class="pointer-events-none fixed inset-0 z-0 opacity-70" aria-hidden="true"></canvas>
-    <div id="cursor-dot" aria-hidden="true"></div>
-    <div id="cursor-ring" aria-hidden="true"></div>
-
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
 
   <div class="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
-
-    <header class="flex items-center justify-between border-b border-line py-6" aria-label="Main navigation">
+    <header class="flex items-center justify-between border-b border-line py-6 transition-all" aria-label="Main navigation">
       <a href="#top" class="font-mono text-sm tracking-[-.04em] text-paper">
         ADITYA<span class="text-lime">.</span>
       </a>
 
       <nav class="hidden items-center gap-7 font-mono text-[11px] uppercase tracking-[.12em] text-muted md:flex">
-        <a href="#profile" class="transition-colors hover:text-lime">01 profile</a>
-        <a href="#contact" class="transition-colors hover:text-lime">02 contact</a>
+        <a href="#profile" class="transition-colors hover:text-lime">01 / profile</a>
+        <a href="#contact" class="transition-colors hover:text-lime">02 / contact</a>
       </nav>
     </header>
 
-  <main id="top">
-    <section class="flex min-h-[calc(100vh-89px)] flex-col justify-center py-20 md:py-28" aria-labelledby="hero-title">
-      
-      <div class="mb-14 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.16em] text-muted">
-        <span class="eyebrow text-paper">I am a student who love to code</span>
-        <span class="hidden text-line sm:inline">/</span>
-        <span class="hidden sm:inline">Based in India</span>
-      </div>
-
-      <p class="mb-4 font-mono text-xs uppercase tracking-[.2em] text-lime">Hello, I'm Aditya</p>
-
-      <h1 id="hero-title" class="max-w-5xl text-[clamp(4.5rem,12vw,11rem)] font-semibold leading-[.82] tracking-[-.09em] text-paper">
-        Building<br>
-        <span class="outline-text">learning</span><br>
-        things<span class="text-lime">.</span>
-      </h1>
-
-      <div class="mt-12 grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-end">
-        <div class="font-mono text-sm leading-7 text-muted">
-          <span class="text-lime">&gt;</span> Software Developer<br>
-          <span class="text-lime">&gt;</span> Thinking Products <br>
-          <span class="text-lime">&gt;</span> Curious Human
-        </div>
-        <div class="max-w-xl">
-          <p class="text-xl leading-relaxed tracking-[-.025em] text-paper sm:text-2xl">
-            I turn complex problems into calm, reliable digital experiences. Currently focused on the space where thoughtful design meets resilient engineering.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-20 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.16em] text-muted">
-        <span class="h-px w-10 bg-line"></span> Scroll to explore <span class="text-lime">↓</span>
-      </div>
-    </section>
-
-    
-    <section id="profile" class="border-t border-line py-24 md:py-32" aria-labelledby="profile-title">
-      
-      <div class="mb-14 flex items-baseline justify-between">
-        <h2 id="profile-title" class="font-mono text-sm uppercase tracking-[.14em] text-lime">01 / profile</h2>
-        <span class="font-mono text-[10px] text-muted">A little context</span>
-      </div>
-
-      
-      <div class="grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:gap-24">
-        
-        <div>
-          <p class="max-w-xl text-3xl leading-tight tracking-[-.05em] text-paper sm:text-4xl">
-            Good software should feel like a clear thought.
-          </p>
-          <p class="mt-8 max-w-md leading-7 text-muted">
-            I'm a student who loves building new things and making products for people who have better things to do than wrestle with their tools. I care about the details, the system underneath them, and the humans on the other side of the screen.
-          </p>
+    <main id="top">
+      <section class="flex min-h-[calc(100vh-89px)] flex-col justify-center py-20 md:py-28" aria-labelledby="hero-title">
+        <div class="reveal mb-12 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[.16em] text-muted" data-reveal-delay="100">
+          <span class="eyebrow text-paper">CS Student & Developer</span>
+          <span class="hidden text-line sm:inline">/</span>
+          <span class="hidden sm:inline">India</span>
         </div>
 
-        
-        <div class="grid grid-cols-2 border-l border-t border-line">
-          
-          <div class="border-b border-r border-line p-5 sm:p-7">
-            <span class="font-mono text-xs text-lime">01</span>
-            <h3 class="mt-12 text-lg text-paper">Systems thinking</h3>
-            <p class="mt-3 text-sm leading-6 text-muted">Durable foundations that support ambitious ideas.</p>
-          </div>
+        <p class="reveal mb-4 font-mono text-xs uppercase tracking-[.2em] text-lime" data-reveal-delay="200">
+          Hello, I'm Aditya
+        </p>
 
-          <div class="border-b border-line p-5 sm:p-7">
-            <span class="font-mono text-xs text-lime">02</span>
-            <h3 class="mt-12 text-lg text-paper">Product instinct</h3>
-            <p class="mt-3 text-sm leading-6 text-muted">Less friction, more moments that feel just right.</p>
-          </div>
+        <h1 id="hero-title" class="reveal max-w-5xl text-[clamp(4.2rem,11vw,10.5rem)] font-semibold leading-[.85] tracking-[-.08em] text-paper" data-reveal-delay="300">
+          Building<br>
+          <span class="outline-text">learning</span><br>
+          things<span class="text-lime">.</span>
+        </h1>
 
-          <div class="border-r border-line p-5 sm:p-7">
-            <span class="font-mono text-xs text-lime">03</span>
-            <h3 class="mt-12 text-lg text-paper">Quiet craft</h3>
-            <p class="mt-3 text-sm leading-6 text-muted">The invisible polish that earns lasting trust.</p>
+        <div class="reveal mt-12 grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-end" data-reveal-delay="400">
+          <div class="font-mono text-sm leading-7 text-muted">
+            <span class="text-lime">&gt;</span> Software Developer<br>
+            <span class="text-lime">&gt;</span> Open Source Explorer<br>
+            <span class="text-lime">&gt;</span> Curious Builder
           </div>
-
-          <div class="p-5 sm:p-7">
-            <span class="font-mono text-xs text-lime">04</span>
-            <h3 class="mt-12 text-lg text-paper">Open practice</h3>
-            <p class="mt-3 text-sm leading-6 text-muted">Clear communication from first sketch to launch.</p>
+          <div class="max-w-xl">
+            <p class="text-xl leading-relaxed tracking-[-.025em] text-paper sm:text-2xl">
+              I love turning ideas into fast, reliable software. Constantly tinkering with modern web stacks, thoughtful design, and building tools that make daily workflows easier.
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+
+        <div class="reveal mt-16 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.16em] text-muted" data-reveal-delay="500">
+          <span class="h-px w-10 bg-line"></span> Scroll to explore <span class="text-lime">↓</span>
+        </div>
+      </section>
+
+      <section id="profile" class="border-t border-line py-24 md:py-32" aria-labelledby="profile-title">
+        <div class="reveal mb-14 flex items-baseline justify-between">
+          <h2 id="profile-title" class="font-mono text-sm uppercase tracking-[.14em] text-lime">01 / profile</h2>
+          <span class="font-mono text-[10px] text-muted">A bit about my work</span>
+        </div>
+
+        <div class="grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:gap-24">
+          <div class="reveal">
+            <p class="max-w-xl text-3xl leading-tight tracking-[-.05em] text-paper sm:text-4xl">
+              Software should be simple, intuitive, and built to last.
+            </p>
+            <p class="mt-8 max-w-md leading-7 text-muted">
+              As a student developer, I focus on understanding things from the ground up—whether that is writing performant code, keeping interfaces clean, or solving practical problems with technology.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 border-t border-line sm:grid-cols-2 sm:border-l">
+            <div class="interactive-card reveal border-b border-line p-6 sm:border-r sm:p-7" data-reveal-delay="100">
+              <span class="font-mono text-xs text-lime">01</span>
+              <h3 class="mt-10 text-lg font-medium text-paper">Solid Fundamentals</h3>
+              <p class="mt-3 text-sm leading-6 text-muted">Building on clean code principles, performance awareness, and resilient architecture.</p>
+            </div>
+
+            <div class="interactive-card reveal border-b border-line p-6 sm:p-7" data-reveal-delay="200">
+              <span class="font-mono text-xs text-lime">02</span>
+              <h3 class="mt-10 text-lg font-medium text-paper">User-Centered Focus</h3>
+              <p class="mt-3 text-sm leading-6 text-muted">Designing clean interfaces that prioritize clarity, smooth motion, and zero friction.</p>
+            </div>
+
+            <div class="interactive-card reveal border-b border-line p-6 sm:border-r sm:p-7" data-reveal-delay="300">
+              <span class="font-mono text-xs text-lime">03</span>
+              <h3 class="mt-10 text-lg font-medium text-paper">Attention to Polish</h3>
+              <p class="mt-3 text-sm leading-6 text-muted">Caring about typography, subtle micro-interactions, and accessibility throughout.</p>
+            </div>
+
+            <div class="interactive-card reveal border-b border-line p-6 sm:p-7" data-reveal-delay="400">
+              <span class="font-mono text-xs text-lime">04</span>
+              <h3 class="mt-10 text-lg font-medium text-paper">Continuous Learning</h3>
+              <p class="mt-3 text-sm leading-6 text-muted">Always experimenting with new technologies, building in public, and sharing knowledge.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer id="contact" class="border-t border-line py-16 md:py-20">
+    <footer id="contact" class="border-t border-line py-16 md:py-24">
       <div class="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-start">
-        
-        
-        <div>
+        <div class="reveal">
           <p class="font-mono text-xs uppercase tracking-[.16em] text-lime">02 / contact</p>
           <h2 class="mt-6 max-w-xl text-4xl leading-none tracking-[-.06em] text-paper sm:text-5xl">
-            Have a project idea?<br>
-            <span class="text-muted">Leave a message.</span>
+            Have an idea?<br>
+            <span class="text-muted">Let's connect.</span>
           </h2>
           <p class="mt-6 max-w-md text-sm leading-relaxed text-muted">
-            Whether you have a new project proposal, suggestions to improve this site, or just want to connect—drop your note below.
+            Whether you want to discuss a project, suggest an idea, or just connect—leave your message below. All responses are logged directly to my Google Sheet.
           </p>
           
           <div class="mt-8 flex gap-8 font-mono text-xs uppercase tracking-[.12em] text-muted">
@@ -242,43 +151,57 @@
           </div>
         </div>
 
-        
-        <form class="space-y-5" onsubmit="event.preventDefault(); alert('Message submitted!');">
-          
-          <div>
-            <label for="user-name" class="mb-2 block font-mono text-[10px] uppercase tracking-[.16em] text-muted">
-              <span class="text-lime">&gt;</span> Your Name
-            </label>
-            <input 
-              type="text" 
-              id="user-name" 
-              required
-              placeholder="What should I call you?" 
-              class="w-full border border-line bg-ink/80 px-4 py-3 font-mono text-xs text-paper placeholder-muted/50 backdrop-blur-sm transition-colors focus:border-lime focus:outline-none"
+        <div class="reveal" data-reveal-delay="200">
+          <form id="contact-form" class="space-y-4">
+            <div>
+              <label for="user-name" class="mb-2 block font-mono text-[10px] uppercase tracking-[.16em] text-muted">
+                <span class="text-lime">&gt;</span> Your Name <span class="text-rust">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="user-name" 
+                required
+                placeholder="Aditya" 
+                class="w-full border border-line bg-ink/80 px-4 py-3 font-mono text-xs text-paper placeholder-muted/40 backdrop-blur-sm transition-colors focus:border-lime focus:outline-none"
+              >
+            </div>
+
+            <div>
+              <label for="user-email" class="mb-2 block font-mono text-[10px] uppercase tracking-[.16em] text-muted">
+                <span class="text-lime">&gt;</span> Email Address (optional)
+              </label>
+              <input 
+                type="email" 
+                id="user-email" 
+                placeholder="you@example.com" 
+                class="w-full border border-line bg-ink/80 px-4 py-3 font-mono text-xs text-paper placeholder-muted/40 backdrop-blur-sm transition-colors focus:border-lime focus:outline-none"
+              >
+            </div>
+
+            <div>
+              <label for="user-message" class="mb-2 block font-mono text-[10px] uppercase tracking-[.16em] text-muted">
+                <span class="text-lime">&gt;</span> Message / Idea <span class="text-rust">*</span>
+              </label>
+              <textarea 
+                id="user-message" 
+                rows="4" 
+                required
+                placeholder="Share your thoughts, project feedback, or say hello..." 
+                class="w-full resize-none border border-line bg-ink/80 p-4 font-mono text-xs text-paper placeholder-muted/40 backdrop-blur-sm transition-colors focus:border-lime focus:outline-none"
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              id="submit-btn"
+              class="w-full bg-lime py-3.5 font-mono text-xs font-medium uppercase tracking-[.14em] text-ink transition-all hover:bg-paper disabled:cursor-not-allowed disabled:opacity-60"
             >
-          </div>
+              <span id="btn-text">Send Message ↗</span>
+            </button>
 
-          <div>
-            <label for="user-message" class="mb-2 block font-mono text-[10px] uppercase tracking-[.16em] text-muted">
-              <span class="text-lime">&gt;</span> Idea / Feedback
-            </label>
-            <textarea 
-              id="user-message" 
-              rows="4" 
-              required
-              placeholder="Share your thoughts, feature ideas, or site feedback..." 
-              class="w-full resize-none border border-line bg-ink/80 p-4 font-mono text-xs text-paper placeholder-muted/50 backdrop-blur-sm transition-colors focus:border-lime focus:outline-none"
-            ></textarea>
-          </div>
-
-         
-          <button 
-            type="submit" 
-            class="w-full bg-lime py-3.5 font-mono text-xs font-medium uppercase tracking-[.14em] text-ink transition-colors hover:bg-paper"
-          >
-            Send Message ↗
-          </button>
-        </form>
+            <div id="form-feedback" class="form-feedback" role="status" aria-live="polite"></div>
+          </form>
+        </div>
       </div>
 
       <div class="mt-20 flex justify-between border-t border-line pt-5 font-mono text-[10px] uppercase tracking-[.14em] text-muted">
@@ -286,176 +209,9 @@
         <span>Built with care</span>
       </div>
     </footer>
-
   </div>
 
-  <script>
-    (() => {
-      const canvas = document.getElementById('particle-canvas');
-      const context = canvas.getContext('2d');
-      const cursorDot = document.getElementById('cursor-dot');
-      const cursorRing = document.getElementById('cursor-ring');
-      const pointer = { x: null, y: null };
-      const dotPosition = { x: 0, y: 0 };
-      const ringPosition = { x: 0, y: 0 };
-      let particles = [];
-      let animationFrame;
-      
-      
-      const colorRgb = '200, 245, 106'; // #c8f56a in RGB
-      const particleLinkDistance = 125;
-      const pointerLinkDistance = 170;
-      const pointerRepelDistance = 35;
-
-      
-      const resize = () => {
-        const ratio = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = window.innerWidth * ratio;
-        canvas.height = window.innerHeight * ratio;
-        canvas.style.width = `${window.innerWidth}px`;
-        canvas.style.height = `${window.innerHeight}px`;
-        context.setTransform(ratio, 0, 0, ratio, 0, 0);
-        
-        particles = Array.from({ length: Math.min(85, Math.floor(window.innerWidth / 16)) }, () => ({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          vx: (Math.random() - 0.5) * 0.22,
-          vy: (Math.random() - 0.5) * 0.22,
-          radius: Math.random() * 1.4 + 0.4,
-          pulse: Math.random() * Math.PI * 2
-        }));
-      };
-
-      
-      const draw = () => {
-        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        
-        
-        if (pointer.x !== null && pointer.y !== null) {
-          dotPosition.x += (pointer.x - dotPosition.x) * 0.85;
-          dotPosition.y += (pointer.y - dotPosition.y) * 0.85;
-          ringPosition.x += (pointer.x - ringPosition.x) * 0.16;
-          ringPosition.y += (pointer.y - ringPosition.y) * 0.16;
-          
-          cursorDot.style.setProperty('--cursor-x', `${dotPosition.x}px`);
-          cursorDot.style.setProperty('--cursor-y', `${dotPosition.y}px`);
-          cursorRing.style.setProperty('--cursor-x', `${ringPosition.x}px`);
-          cursorRing.style.setProperty('--cursor-y', `${ringPosition.y}px`);
-
-          
-          const glow = context.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 240);
-          glow.addColorStop(0, `rgba(${colorRgb}, .07)`);
-          glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-          context.fillStyle = glow;
-          context.fillRect(0, 0, window.innerWidth, window.innerHeight);
-        }
-
-        
-        particles.forEach((particle, index) => {
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-          particle.pulse += 0.025;
-
-          
-          if (particle.x < -20 || particle.x > window.innerWidth + 20) particle.vx *= -1;
-          if (particle.y < -20 || particle.y > window.innerHeight + 20) particle.vy *= -1;
-
-          
-          if (pointer.x !== null) {
-            const distanceX = pointer.x - particle.x;
-            const distanceY = pointer.y - particle.y;
-            const distance = Math.hypot(distanceX, distanceY);
-
-            if (distance < pointerRepelDistance && distance > 0) {
-              const force = (pointerRepelDistance - distance) / pointerRepelDistance;
-              particle.x -= (distanceX / distance) * force * 2.8;
-              particle.y -= (distanceY / distance) * force * 2.8;
-            }
-
-            if (distance < pointerLinkDistance) {
-              context.beginPath();
-              context.strokeStyle = `rgba(${colorRgb}, ${(1 - distance / pointerLinkDistance) * .55})`;
-              context.lineWidth = .85;
-              context.moveTo(particle.x, particle.y);
-              context.lineTo(pointer.x, pointer.y);
-              context.stroke();
-            }
-          }
-
-          
-          const dynamicRadius = particle.radius + Math.sin(particle.pulse) * .35;
-          context.beginPath();
-          context.fillStyle = `rgba(${colorRgb}, .85)`;
-          context.shadowColor = `rgba(${colorRgb}, .8)`;
-          context.shadowBlur = 6;
-          context.arc(particle.x, particle.y, Math.max(.2, dynamicRadius), 0, Math.PI * 2);
-          context.fill();
-          context.shadowBlur = 0;
-
-          
-          for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
-            const next = particles[nextIndex];
-            const distance = Math.hypot(particle.x - next.x, particle.y - next.y);
-            if (distance < particleLinkDistance) {
-              context.beginPath();
-              context.strokeStyle = `rgba(${colorRgb}, ${(1 - distance / particleLinkDistance) * .28})`;
-              context.lineWidth = .65;
-              context.moveTo(particle.x, particle.y);
-              context.lineTo(next.x, next.y);
-              context.stroke();
-            }
-          }
-        });
-
-        animationFrame = requestAnimationFrame(draw);
-      };
-
-      
-      window.addEventListener('resize', resize);
-
-      window.addEventListener('pointermove', (event) => {
-        pointer.x = event.clientX;
-        pointer.y = event.clientY;
-        if (!cursorDot.classList.contains('is-visible')) {
-          dotPosition.x = ringPosition.x = event.clientX;
-          dotPosition.y = ringPosition.y = event.clientY;
-        }
-        cursorDot.classList.add('is-visible');
-        cursorRing.classList.add('is-visible');
-      });
-
-      
-      window.addEventListener('pointerover', (event) => {
-        if (event.target.closest('a, button, input, textarea, [role="button"]')) {
-          cursorDot.classList.add('is-hovering');
-          cursorRing.classList.add('is-hovering');
-        }
-      });
-
-      window.addEventListener('pointerout', (event) => {
-        if (event.target.closest('a, button, input, textarea, [role="button"]')) {
-          cursorDot.classList.remove('is-hovering');
-          cursorRing.classList.remove('is-hovering');
-        }
-      });
-
-      window.addEventListener('pointerleave', () => {
-        pointer.x = null;
-        pointer.y = null;
-        cursorDot.classList.remove('is-visible', 'is-hovering');
-        cursorRing.classList.remove('is-visible', 'is-hovering');
-      });
-
-      
-      resize();
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        draw();
-      } else {
-        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      }
-
-      window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame));
-    })();
-  </script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 </html>

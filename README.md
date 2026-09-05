@@ -1,44 +1,42 @@
 # Aditya Anshu - Developer Portfolio
 
-A single-page personal portfolio for Aditya Anshu, a student and product-minded software developer based in India. The site presents a dark, technical visual style focused on thoughtful design, resilient engineering, and quiet software craft.
+A personal portfolio built with HTML, Tailwind CSS, and Vanilla JavaScript. Features smooth scroll interactions, an interactive particle background, a custom cursor, and a contact form that writes directly to Google Sheets using Google Apps Script.
 
-## Website
+## What's Inside
 
-The portfolio includes:
-
-- A hero section introducing Aditya as a software developer, product thinker, and curious human.
-- A profile section describing his approach to building software.
-- Four working principles: systems thinking, product instinct, quiet craft, and open practice.
-- A contact section with a GitHub link and a name/message form.
-
-## Tech Stack
-
-- Semantic HTML5
-- [Tailwind CSS](https://tailwindcss.com/) via CDN
-- Vanilla JavaScript for the contact form confirmation
-- [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) and [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) from Google Fonts
+- **Scroll Effects**: Top scroll progress bar and viewport reveal animations.
+- **Interactive UI**: Reactive particle canvas, custom cursor, and hover spotlights on principle cards.
+- **Google Sheets Contact Form**: Contact inquiries are sent straight to Google Sheets via Google Apps Script without needing any external server or paid API.
 
 ## Project Structure
 
 ```text
 .
-├── index.html    # Complete portfolio page
-├── vercel.json   # Static Vercel configuration
-└── README.md     # Project documentation
+├── css/
+│   └── style.css            # Custom animations, progress bar & cursor styles
+├── js/
+│   ├── main.js              # Canvas background, cursor & scroll animations
+│   └── contact.js           # Form handling & Google Sheets submission
+├── apps-script/
+│   └── Code.gs              # Google Apps Script for Google Sheets
+├── favicon.svg              # Site icon
+├── index.html               # Main portfolio page
+├── vercel.json              # Static deployment configuration
+└── README.md
 ```
 
-## Contact Form
+## Running Locally
 
-The contact form currently prevents a real submission and displays a confirmation alert in the browser. It does not send email or store messages. Connect it to a form service or backend before using it for production contact requests.
+Open `index.html` directly in your browser, or start a local server:
 
-## Deploy on Vercel
+```bash
+# Python
+python -m http.server 3000
 
-This is a static site with no build step.
+# Node
+npx serve .
+```
 
-1. Push the project to GitHub, GitLab, or Bitbucket.
-2. Import the repository in Vercel.
-3. Use the `Other` framework preset.
-4. Leave Build Command and Output Directory empty.
-5. Deploy.
+## Deployment
 
-Vercel serves `index.html` from the project root. The included `vercel.json` enables clean URLs.
+This site is completely static and ready to deploy on **Vercel**, **GitHub Pages**, or **Netlify**.
