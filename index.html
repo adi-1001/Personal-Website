@@ -53,10 +53,75 @@
       background: #c8f56a;
       box-shadow: 0 0 14px #c8f56a;
     }
+
+      
+       
+    html, body, a, button, input, textarea, [role="button"] {
+      cursor: none !important;
+    }
+
+    
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      opacity: 0;
+      transform-origin: center center;
+      transform: translate(-50%, -50%) translate(var(--cursor-x, -100px), var(--cursor-y, -100px));
+      transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    
+    #cursor-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #c8f56a;
+      box-shadow: 0 0 8px #c8f56a, 0 0 16px rgba(200, 245, 106, 0.8);
+    }
+
+    
+    #cursor-ring {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(200, 245, 106, 0.5);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 0 12px rgba(200, 245, 106, 0.2);
+    }
+
+    
+    #cursor-dot.is-visible,
+    #cursor-ring.is-visible {
+      opacity: 1;
+    }
+
+    
+    #cursor-dot.is-hovering {
+      width: 10px;
+      height: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 0 12px #ffffff, 0 0 24px #c8f56a;
+    }
+
+    #cursor-ring.is-hovering {
+      width: 52px;
+      height: 52px;
+      border-color: #c8f56a;
+      background-color: rgba(200, 245, 106, 0.1);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 0 25px rgba(200, 245, 106, 0.4);
+    }
     
   </style>
 </head>
 <body class="font-sans antialiased">
+  <canvas id="particle-canvas" class="pointer-events-none fixed inset-0 z-0 opacity-70" aria-hidden="true"></canvas>
+    <div id="cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true"></div>
 
 
   <div class="relative z-10 mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
@@ -224,5 +289,173 @@
 
   </div>
 
+  <script>
+    (() => {
+      const canvas = document.getElementById('particle-canvas');
+      const context = canvas.getContext('2d');
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorRing = document.getElementById('cursor-ring');
+      const pointer = { x: null, y: null };
+      const dotPosition = { x: 0, y: 0 };
+      const ringPosition = { x: 0, y: 0 };
+      let particles = [];
+      let animationFrame;
+      
+      
+      const colorRgb = '200, 245, 106'; // #c8f56a in RGB
+      const particleLinkDistance = 125;
+      const pointerLinkDistance = 170;
+      const pointerRepelDistance = 35;
+
+      
+      const resize = () => {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = window.innerWidth * ratio;
+        canvas.height = window.innerHeight * ratio;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        
+        particles = Array.from({ length: Math.min(85, Math.floor(window.innerWidth / 16)) }, () => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.22,
+          radius: Math.random() * 1.4 + 0.4,
+          pulse: Math.random() * Math.PI * 2
+        }));
+      };
+
+      
+      const draw = () => {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        
+        
+        if (pointer.x !== null && pointer.y !== null) {
+          dotPosition.x += (pointer.x - dotPosition.x) * 0.85;
+          dotPosition.y += (pointer.y - dotPosition.y) * 0.85;
+          ringPosition.x += (pointer.x - ringPosition.x) * 0.16;
+          ringPosition.y += (pointer.y - ringPosition.y) * 0.16;
+          
+          cursorDot.style.setProperty('--cursor-x', `${dotPosition.x}px`);
+          cursorDot.style.setProperty('--cursor-y', `${dotPosition.y}px`);
+          cursorRing.style.setProperty('--cursor-x', `${ringPosition.x}px`);
+          cursorRing.style.setProperty('--cursor-y', `${ringPosition.y}px`);
+
+          
+          const glow = context.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 240);
+          glow.addColorStop(0, `rgba(${colorRgb}, .07)`);
+          glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          context.fillStyle = glow;
+          context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        }
+
+        
+        particles.forEach((particle, index) => {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.pulse += 0.025;
+
+          
+          if (particle.x < -20 || particle.x > window.innerWidth + 20) particle.vx *= -1;
+          if (particle.y < -20 || particle.y > window.innerHeight + 20) particle.vy *= -1;
+
+          
+          if (pointer.x !== null) {
+            const distanceX = pointer.x - particle.x;
+            const distanceY = pointer.y - particle.y;
+            const distance = Math.hypot(distanceX, distanceY);
+
+            if (distance < pointerRepelDistance && distance > 0) {
+              const force = (pointerRepelDistance - distance) / pointerRepelDistance;
+              particle.x -= (distanceX / distance) * force * 2.8;
+              particle.y -= (distanceY / distance) * force * 2.8;
+            }
+
+            if (distance < pointerLinkDistance) {
+              context.beginPath();
+              context.strokeStyle = `rgba(${colorRgb}, ${(1 - distance / pointerLinkDistance) * .55})`;
+              context.lineWidth = .85;
+              context.moveTo(particle.x, particle.y);
+              context.lineTo(pointer.x, pointer.y);
+              context.stroke();
+            }
+          }
+
+          
+          const dynamicRadius = particle.radius + Math.sin(particle.pulse) * .35;
+          context.beginPath();
+          context.fillStyle = `rgba(${colorRgb}, .85)`;
+          context.shadowColor = `rgba(${colorRgb}, .8)`;
+          context.shadowBlur = 6;
+          context.arc(particle.x, particle.y, Math.max(.2, dynamicRadius), 0, Math.PI * 2);
+          context.fill();
+          context.shadowBlur = 0;
+
+          
+          for (let nextIndex = index + 1; nextIndex < particles.length; nextIndex += 1) {
+            const next = particles[nextIndex];
+            const distance = Math.hypot(particle.x - next.x, particle.y - next.y);
+            if (distance < particleLinkDistance) {
+              context.beginPath();
+              context.strokeStyle = `rgba(${colorRgb}, ${(1 - distance / particleLinkDistance) * .28})`;
+              context.lineWidth = .65;
+              context.moveTo(particle.x, particle.y);
+              context.lineTo(next.x, next.y);
+              context.stroke();
+            }
+          }
+        });
+
+        animationFrame = requestAnimationFrame(draw);
+      };
+
+      
+      window.addEventListener('resize', resize);
+
+      window.addEventListener('pointermove', (event) => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        if (!cursorDot.classList.contains('is-visible')) {
+          dotPosition.x = ringPosition.x = event.clientX;
+          dotPosition.y = ringPosition.y = event.clientY;
+        }
+        cursorDot.classList.add('is-visible');
+        cursorRing.classList.add('is-visible');
+      });
+
+      
+      window.addEventListener('pointerover', (event) => {
+        if (event.target.closest('a, button, input, textarea, [role="button"]')) {
+          cursorDot.classList.add('is-hovering');
+          cursorRing.classList.add('is-hovering');
+        }
+      });
+
+      window.addEventListener('pointerout', (event) => {
+        if (event.target.closest('a, button, input, textarea, [role="button"]')) {
+          cursorDot.classList.remove('is-hovering');
+          cursorRing.classList.remove('is-hovering');
+        }
+      });
+
+      window.addEventListener('pointerleave', () => {
+        pointer.x = null;
+        pointer.y = null;
+        cursorDot.classList.remove('is-visible', 'is-hovering');
+        cursorRing.classList.remove('is-visible', 'is-hovering');
+      });
+
+      
+      resize();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        draw();
+      } else {
+        context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      }
+
+      window.addEventListener('pagehide', () => cancelAnimationFrame(animationFrame));
+    })();
+  </script>
 </body>
 </html>
