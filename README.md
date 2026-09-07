@@ -1,42 +1,32 @@
-# Aditya Anshu - Developer Portfolio
+# Aditya / Software Developer
 
-A personal portfolio built with HTML, Tailwind CSS, and Vanilla JavaScript. Features smooth scroll interactions, an interactive particle background, a custom cursor, and a contact form that writes directly to Google Sheets using Google Apps Script.
+A personal portfolio website, built to introduce my work and give people a simple way to contact me.
 
-## What's Inside
+**[![Open Aditya's portfolio website](image/Banner.png)](https://adi-1001.vercel.app/)**
 
-- **Scroll Effects**: Top scroll progress bar and viewport reveal animations.
-- **Interactive UI**: Reactive particle canvas, custom cursor, and hover spotlights on principle cards.
-- **Google Sheets Contact Form**: Contact inquiries are sent straight to Google Sheets via Google Apps Script without needing any external server or paid API.
+## How I Made It
 
-## Project Structure
+I built the site from scratch with HTML, CSS, and vanilla JavaScript:
 
-```text
-.
-├── css/
-│   └── style.css            # Custom animations, progress bar & cursor styles
-├── js/
-│   ├── main.js              # Canvas background, cursor & scroll animations
-│   └── contact.js           # Form handling & Google Sheets submission
-├── apps-script/
-│   └── Code.gs              # Google Apps Script for Google Sheets
-├── favicon.svg              # Site icon
-├── index.html               # Main portfolio page
-├── vercel.json              # Static deployment configuration
-└── README.md
-```
+**HTML** provides the portfolio layout, profile section, navigation, and contact form.
+**Tailwind CSS** uses in the utility-based styling, layout, and color system.
+**JavaScript** use in scroll progress, animated section, interactive profile grid, and the custom cursor.
 
-## Running Locally
+## Quick Start
 
-Open `index.html` directly in your browser, or start a local server:
+Just click on the link to go to my website**[OPEN THE LIVE PROFILE ->](https://adi-1001.vercel.app/)** That's it.
 
-```bash
-# Python
-python -m http.server 3000
+## Screenshots
 
-# Node
-npx serve .
-```
+**[![Banner screenshot](image/Banner.png)](https://adi-1001.vercel.app/)**
 
-## Deployment
+**[![Contact screenshot](image/Contact.png)](https://adi-1001.vercel.app/)**
 
-This site is completely static and ready to deploy on **Vercel**, **GitHub Pages**, or **Netlify**.
+**[![Profile screenshot](image/Profile.png)](https://adi-1001.vercel.app/)**
+
+## Feature
+
+- A partical animation in the background.
+- A custom mouse pionter which attach with particle
+- Animation in scrolling
+- A commentbox for contact and ideas
