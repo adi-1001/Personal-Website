@@ -15,66 +15,6 @@ window.onscroll = function () {
   }
 };
 
-const observer = new IntersectionObserver(function (entries) {
-  entries.forEach(function (entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-    }
-  });
-});
-
-document.querySelectorAll('.reveal').forEach(function (el) {
-  observer.observe(el);
-});
-
-const cards = document.querySelectorAll('.interactive-card');
-cards.forEach(function (card) {
-  card.onmousemove = function (e) {
-    let rect = card.getBoundingClientRect();
-    card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
-    card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
-  };
-});
-
-const cursorDot = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-
-if (cursorDot && cursorRing) {
-  let mouseX = 0;
-  let mouseY = 0;
-  let ringX = 0;
-  let ringY = 0;
-
-  window.onmousemove = function (e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorDot.classList.add('is-visible');
-    cursorRing.classList.add('is-visible');
-    cursorDot.style.setProperty('--cursor-x', mouseX + 'px');
-    cursorDot.style.setProperty('--cursor-y', mouseY + 'px');
-  };
-
-  function moveRing() {
-    ringX += (mouseX - ringX) * 0.15;
-    ringY += (mouseY - ringY) * 0.15;
-    cursorRing.style.setProperty('--cursor-x', ringX + 'px');
-    cursorRing.style.setProperty('--cursor-y', ringY + 'px');
-    requestAnimationFrame(moveRing);
-  }
-  moveRing();
-
-  const links = document.querySelectorAll('a, button, .interactive-card');
-  links.forEach(function (link) {
-    link.onmouseenter = function () {
-      cursorDot.classList.add('is-hovering');
-      cursorRing.classList.add('is-hovering');
-    };
-    link.onmouseleave = function () {
-      cursorDot.classList.remove('is-hovering');
-      cursorRing.classList.remove('is-hovering');
-    };
-  });
-}
 
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
